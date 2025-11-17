@@ -1,0 +1,21 @@
+{
+  "name": "platix-thEme",
+  "displayName": "thEme!",
+  "description": "A personal theme, if you like it feel free to use!",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.106.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "thEme!",
+        "uiTheme": "vs-dark",
+        "path": "./themes/thEme!-color-theme.json"
+      }
+    ]
+  }
+}

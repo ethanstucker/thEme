@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>thEme! Preview - Java</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: #1A1E22;
+    font-family: 'Consolas', 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .window {
+    max-width: 920px;
+    margin: 40px auto;
+  }
+  .titlebar {
+    background: #1A1E22;
+    border: 1px solid #0F1519;
+    border-bottom: none;
+    padding: 8px 16px;
+    color: #C9B99A;
+    font-size: 12px;
+    border-radius: 8px 8px 0 0;
+  }
+  .tabs {
+    background: #222729;
+    border-left: 1px solid #0F1519;
+    border-right: 1px solid #0F1519;
+    display: flex;
+    gap: 0;
+  }
+  .tab {
+    padding: 8px 20px;
+    color: #6B7F8E;
+    border-right: 1px solid #0F1519;
+    font-size: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .tab:hover {
+    background: #272C3080;
+    color: #C9B99A;
+  }
+  .tab.active {
+    background: #272C30;
+    color: #D3C6AA;
+    border-top: 2px solid #7CAFC2;
+  }
+  .tab.inactive {
+    background: #222729;
+    border-top: 2px solid transparent;
+  }
+  .editor {
+    background: #272C30;
+    border: 1px solid #0F1519;
+    padding: 20px 24px;
+    color: #D3C6AA;
+    border-radius: 0 0 8px 8px;
+    overflow-x: auto;
+    min-height: 400px;
+  }
+  .code-panel { display: none; }
+  .code-panel.active { display: block; }
+  .line {
+    white-space: pre;
+  }
+  .ln {
+    color: #464C52;
+    display: inline-block;
+    width: 35px;
+    text-align: right;
+    margin-right: 20px;
+    user-select: none;
+  }
+
+  /* Token colors */
+  .comment   { color: #6B7F8E; font-style: italic; }
+  .keyword   { color: #D699B6; }
+  .control   { color: #E67E80; }
+  .storage   { color: #7FBBB3; }
+  .function  { color: #7CAFC2; }
+  .variable  { color: #B0A4C8; }
+  .property  { color: #6B9E8A; }
+  .string    { color: #DBBC7F; }
+  .number    { color: #E69875; }
+  .operator  { color: #7FBBB3; }
+  .coral     { color: #E67E80; }
+  .paren     { color: #7FBBB3; }
+  .class-name{ color: #D3C6AA; }
+  .annotation{ color: #D699B6; }
+
+  h2 { color: #7CAFC2; margin: 30px 0 10px; font-size: 16px; font-weight: normal; }
+
+  .palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px 0 30px;
+    padding: 20px;
+    background: #272C30;
+    border: 1px solid #0F1519;
+    border-radius: 8px;
+  }
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #C9B99A;
+  }
+  .swatch .box {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+<div class="window">
+
+  <h2>Color Palette</h2>
+  <div class="palette">
+    <div class="swatch"><div class="box" style="background:#E67E80"></div>Control Flow</div>
+    <div class="swatch"><div class="box" style="background:#D699B6"></div>Keywords</div>
+    <div class="swatch"><div class="box" style="background:#7FBBB3"></div>Types</div>
+    <div class="swatch"><div class="box" style="background:#7CAFC2"></div>Functions</div>
+    <div class="swatch"><div class="box" style="background:#B0A4C8"></div>Variables</div>
+    <div class="swatch"><div class="box" style="background:#6B9E8A"></div>Properties</div>
+    <div class="swatch"><div class="box" style="background:#DBBC7F"></div>Strings</div>
+    <div class="swatch"><div class="box" style="background:#E69875"></div>Numbers</div>
+    <div class="swatch"><div class="box" style="background:#6B7F8E"></div>Comments</div>
+    <div class="swatch"><div class="box" style="background:#D3C6AA"></div>Foreground</div>
+  </div>
+
+  <h2>Java Preview</h2>
+  <div class="titlebar">thEme! Preview</div>
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab(0)">Vector3.java</div>
+    <div class="tab inactive" onclick="switchTab(1)">GameEngine.java</div>
+    <div class="tab inactive" onclick="switchTab(2)">Renderer.java</div>
+  </div>
+  <div class="editor">
+
+    <!-- Tab 0: Vector3.java -->
+    <div class="code-panel active" id="panel-0">
+<div class="line"><span class="ln"> 1</span><span class="keyword">package</span> <span class="variable">com</span><span class="paren">.</span><span class="property">engine</span><span class="paren">.</span><span class="property">math</span><span class="paren">;</span></div>
+<div class="line"><span class="ln"> 2</span></div>
+<div class="line"><span class="ln"> 3</span><span class="comment">/**</span></div>
+<div class="line"><span class="ln"> 4</span><span class="comment"> * A 3D vector class for game math operations.</span></div>
+<div class="line"><span class="ln"> 5</span><span class="comment"> */</span></div>
+<div class="line"><span class="ln"> 6</span><span class="keyword">public</span> <span class="keyword">class</span> <span class="class-name">Vector3</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln"> 7</span></div>
+<div class="line"><span class="ln"> 8</span>    <span class="keyword">private</span> <span class="storage">double</span> <span class="variable">x</span><span class="paren">,</span> <span class="variable">y</span><span class="paren">,</span> <span class="variable">z</span><span class="paren">;</span></div>
+<div class="line"><span class="ln"> 9</span></div>
+<div class="line"><span class="ln">10</span>    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class-name">Vector3</span> <span class="variable">ZERO</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="class-name">Vector3</span><span class="paren">(</span><span class="number">0</span><span class="paren">,</span> <span class="number">0</span><span class="paren">,</span> <span class="number">0</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">11</span>    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class-name">Vector3</span> <span class="variable">UP</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="class-name">Vector3</span><span class="paren">(</span><span class="number">0</span><span class="paren">,</span> <span class="number">1</span><span class="paren">,</span> <span class="number">0</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">12</span></div>
+<div class="line"><span class="ln">13</span>    <span class="keyword">public</span> <span class="function">Vector3</span><span class="paren">(</span><span class="storage">double</span> <span class="variable">x</span><span class="paren">,</span> <span class="storage">double</span> <span class="variable">y</span><span class="paren">,</span> <span class="storage">double</span> <span class="variable">z</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">14</span>        <span class="coral">this</span><span class="paren">.</span><span class="property">x</span> <span class="operator">=</span> <span class="variable">x</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">15</span>        <span class="coral">this</span><span class="paren">.</span><span class="property">y</span> <span class="operator">=</span> <span class="variable">y</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">16</span>        <span class="coral">this</span><span class="paren">.</span><span class="property">z</span> <span class="operator">=</span> <span class="variable">z</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">17</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">18</span></div>
+<div class="line"><span class="ln">19</span>    <span class="keyword">public</span> <span class="class-name">Vector3</span> <span class="function">add</span><span class="paren">(</span><span class="class-name">Vector3</span> <span class="variable">other</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">20</span>        <span class="control">return</span> <span class="keyword">new</span> <span class="class-name">Vector3</span><span class="paren">(</span></div>
+<div class="line"><span class="ln">21</span>            <span class="coral">this</span><span class="paren">.</span><span class="property">x</span> <span class="operator">+</span> <span class="variable">other</span><span class="paren">.</span><span class="property">x</span><span class="paren">,</span></div>
+<div class="line"><span class="ln">22</span>            <span class="coral">this</span><span class="paren">.</span><span class="property">y</span> <span class="operator">+</span> <span class="variable">other</span><span class="paren">.</span><span class="property">y</span><span class="paren">,</span></div>
+<div class="line"><span class="ln">23</span>            <span class="coral">this</span><span class="paren">.</span><span class="property">z</span> <span class="operator">+</span> <span class="variable">other</span><span class="paren">.</span><span class="property">z</span></div>
+<div class="line"><span class="ln">24</span>        <span class="paren">);</span></div>
+<div class="line"><span class="ln">25</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">26</span></div>
+<div class="line"><span class="ln">27</span>    <span class="keyword">public</span> <span class="class-name">Vector3</span> <span class="function">scale</span><span class="paren">(</span><span class="storage">double</span> <span class="variable">factor</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">28</span>        <span class="control">return</span> <span class="keyword">new</span> <span class="class-name">Vector3</span><span class="paren">(</span><span class="variable">x</span> <span class="operator">*</span> <span class="variable">factor</span><span class="paren">,</span> <span class="variable">y</span> <span class="operator">*</span> <span class="variable">factor</span><span class="paren">,</span> <span class="variable">z</span> <span class="operator">*</span> <span class="variable">factor</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">29</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">30</span></div>
+<div class="line"><span class="ln">31</span>    <span class="keyword">public</span> <span class="storage">double</span> <span class="function">dot</span><span class="paren">(</span><span class="class-name">Vector3</span> <span class="variable">other</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">32</span>        <span class="control">return</span> <span class="variable">x</span> <span class="operator">*</span> <span class="variable">other</span><span class="paren">.</span><span class="property">x</span> <span class="operator">+</span> <span class="variable">y</span> <span class="operator">*</span> <span class="variable">other</span><span class="paren">.</span><span class="property">y</span> <span class="operator">+</span> <span class="variable">z</span> <span class="operator">*</span> <span class="variable">other</span><span class="paren">.</span><span class="property">z</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">33</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">34</span></div>
+<div class="line"><span class="ln">35</span>    <span class="keyword">public</span> <span class="storage">double</span> <span class="function">magnitude</span><span class="paren">()</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">36</span>        <span class="control">return</span> <span class="class-name">Math</span><span class="paren">.</span><span class="function">sqrt</span><span class="paren">(</span><span class="variable">x</span> <span class="operator">*</span> <span class="variable">x</span> <span class="operator">+</span> <span class="variable">y</span> <span class="operator">*</span> <span class="variable">y</span> <span class="operator">+</span> <span class="variable">z</span> <span class="operator">*</span> <span class="variable">z</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">37</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">38</span></div>
+<div class="line"><span class="ln">39</span>    <span class="keyword">public</span> <span class="class-name">Vector3</span> <span class="function">normalize</span><span class="paren">()</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">40</span>        <span class="storage">double</span> <span class="variable">mag</span> <span class="operator">=</span> <span class="function">magnitude</span><span class="paren">();</span></div>
+<div class="line"><span class="ln">41</span>        <span class="control">if</span> <span class="paren">(</span><span class="variable">mag</span> <span class="operator">==</span> <span class="number">0</span><span class="paren">)</span> <span class="control">return</span> <span class="variable">ZERO</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">42</span>        <span class="control">return</span> <span class="function">scale</span><span class="paren">(</span><span class="number">1.0</span> <span class="operator">/</span> <span class="variable">mag</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">43</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">44</span></div>
+<div class="line"><span class="ln">45</span>    <span class="annotation">@Override</span></div>
+<div class="line"><span class="ln">46</span>    <span class="keyword">public</span> <span class="class-name">String</span> <span class="function">toString</span><span class="paren">()</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">47</span>        <span class="control">return</span> <span class="string">"Vec3("</span> <span class="operator">+</span> <span class="variable">x</span> <span class="operator">+</span> <span class="string">", "</span> <span class="operator">+</span> <span class="variable">y</span> <span class="operator">+</span> <span class="string">", "</span> <span class="operator">+</span> <span class="variable">z</span> <span class="operator">+</span> <span class="string">")"</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">48</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">49</span><span class="paren">}</span></div>
+    </div>
+
+    <!-- Tab 1: GameEngine.java -->
+    <div class="code-panel" id="panel-1">
+<div class="line"><span class="ln"> 1</span><span class="keyword">package</span> <span class="variable">com</span><span class="paren">.</span><span class="property">engine</span><span class="paren">.</span><span class="property">core</span><span class="paren">;</span></div>
+<div class="line"><span class="ln"> 2</span></div>
+<div class="line"><span class="ln"> 3</span><span class="control">import</span> <span class="variable">com</span><span class="paren">.</span><span class="property">engine</span><span class="paren">.</span><span class="property">math</span><span class="paren">.</span><span class="class-name">Vector3</span><span class="paren">;</span></div>
+<div class="line"><span class="ln"> 4</span><span class="control">import</span> <span class="variable">java</span><span class="paren">.</span><span class="property">util</span><span class="paren">.</span><span class="class-name">ArrayList</span><span class="paren">;</span></div>
+<div class="line"><span class="ln"> 5</span><span class="control">import</span> <span class="variable">java</span><span class="paren">.</span><span class="property">util</span><span class="paren">.</span><span class="class-name">List</span><span class="paren">;</span></div>
+<div class="line"><span class="ln"> 6</span></div>
+<div class="line"><span class="ln"> 7</span><span class="comment">/**</span></div>
+<div class="line"><span class="ln"> 8</span><span class="comment"> * Core game engine loop with fixed timestep physics.</span></div>
+<div class="line"><span class="ln"> 9</span><span class="comment"> */</span></div>
+<div class="line"><span class="ln">10</span><span class="keyword">public</span> <span class="keyword">class</span> <span class="class-name">GameEngine</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">11</span></div>
+<div class="line"><span class="ln">12</span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="storage">double</span> <span class="variable">TICK_RATE</span> <span class="operator">=</span> <span class="number">1.0</span> <span class="operator">/</span> <span class="number">60.0</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">13</span>    <span class="keyword">private</span> <span class="keyword">final</span> <span class="class-name">List</span><span class="paren">&lt;</span><span class="class-name">Entity</span><span class="paren">&gt;</span> <span class="variable">entities</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="class-name">ArrayList</span><span class="paren">&lt;&gt;();</span></div>
+<div class="line"><span class="ln">14</span>    <span class="keyword">private</span> <span class="storage">boolean</span> <span class="variable">running</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">15</span>    <span class="keyword">private</span> <span class="storage">double</span> <span class="variable">accumulator</span> <span class="operator">=</span> <span class="number">0.0</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">16</span></div>
+<div class="line"><span class="ln">17</span>    <span class="keyword">public</span> <span class="storage">void</span> <span class="function">start</span><span class="paren">()</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">18</span>        <span class="variable">running</span> <span class="operator">=</span> <span class="number">true</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">19</span>        <span class="storage">long</span> <span class="variable">lastTime</span> <span class="operator">=</span> <span class="class-name">System</span><span class="paren">.</span><span class="function">nanoTime</span><span class="paren">();</span></div>
+<div class="line"><span class="ln">20</span></div>
+<div class="line"><span class="ln">21</span>        <span class="control">while</span> <span class="paren">(</span><span class="variable">running</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">22</span>            <span class="storage">long</span> <span class="variable">now</span> <span class="operator">=</span> <span class="class-name">System</span><span class="paren">.</span><span class="function">nanoTime</span><span class="paren">();</span></div>
+<div class="line"><span class="ln">23</span>            <span class="storage">double</span> <span class="variable">delta</span> <span class="operator">=</span> <span class="paren">(</span><span class="variable">now</span> <span class="operator">-</span> <span class="variable">lastTime</span><span class="paren">)</span> <span class="operator">/</span> <span class="number">1_000_000_000.0</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">24</span>            <span class="variable">lastTime</span> <span class="operator">=</span> <span class="variable">now</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">25</span>            <span class="variable">accumulator</span> <span class="operator">+=</span> <span class="variable">delta</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">26</span></div>
+<div class="line"><span class="ln">27</span>            <span class="comment">// Fixed timestep physics updates</span></div>
+<div class="line"><span class="ln">28</span>            <span class="control">while</span> <span class="paren">(</span><span class="variable">accumulator</span> <span class="operator">&gt;=</span> <span class="variable">TICK_RATE</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">29</span>                <span class="function">updatePhysics</span><span class="paren">(</span><span class="variable">TICK_RATE</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">30</span>                <span class="variable">accumulator</span> <span class="operator">-=</span> <span class="variable">TICK_RATE</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">31</span>            <span class="paren">}</span></div>
+<div class="line"><span class="ln">32</span></div>
+<div class="line"><span class="ln">33</span>            <span class="function">render</span><span class="paren">(</span><span class="variable">accumulator</span> <span class="operator">/</span> <span class="variable">TICK_RATE</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">34</span>        <span class="paren">}</span></div>
+<div class="line"><span class="ln">35</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">36</span></div>
+<div class="line"><span class="ln">37</span>    <span class="keyword">private</span> <span class="storage">void</span> <span class="function">updatePhysics</span><span class="paren">(</span><span class="storage">double</span> <span class="variable">dt</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">38</span>        <span class="control">for</span> <span class="paren">(</span><span class="class-name">Entity</span> <span class="variable">entity</span> <span class="paren">:</span> <span class="variable">entities</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">39</span>            <span class="class-name">Vector3</span> <span class="variable">velocity</span> <span class="operator">=</span> <span class="variable">entity</span><span class="paren">.</span><span class="function">getVelocity</span><span class="paren">();</span></div>
+<div class="line"><span class="ln">40</span>            <span class="class-name">Vector3</span> <span class="variable">gravity</span> <span class="operator">=</span> <span class="class-name">Vector3</span><span class="paren">.</span><span class="property">UP</span><span class="paren">.</span><span class="function">scale</span><span class="paren">(</span><span class="operator">-</span><span class="number">9.81</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">41</span></div>
+<div class="line"><span class="ln">42</span>            <span class="variable">velocity</span> <span class="operator">=</span> <span class="variable">velocity</span><span class="paren">.</span><span class="function">add</span><span class="paren">(</span><span class="variable">gravity</span><span class="paren">.</span><span class="function">scale</span><span class="paren">(</span><span class="variable">dt</span><span class="paren">));</span></div>
+<div class="line"><span class="ln">43</span>            <span class="variable">entity</span><span class="paren">.</span><span class="function">setVelocity</span><span class="paren">(</span><span class="variable">velocity</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">44</span></div>
+<div class="line"><span class="ln">45</span>            <span class="class-name">Vector3</span> <span class="variable">pos</span> <span class="operator">=</span> <span class="variable">entity</span><span class="paren">.</span><span class="function">getPosition</span><span class="paren">();</span></div>
+<div class="line"><span class="ln">46</span>            <span class="variable">entity</span><span class="paren">.</span><span class="function">setPosition</span><span class="paren">(</span><span class="variable">pos</span><span class="paren">.</span><span class="function">add</span><span class="paren">(</span><span class="variable">velocity</span><span class="paren">.</span><span class="function">scale</span><span class="paren">(</span><span class="variable">dt</span><span class="paren">)));</span></div>
+<div class="line"><span class="ln">47</span>        <span class="paren">}</span></div>
+<div class="line"><span class="ln">48</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">49</span></div>
+<div class="line"><span class="ln">50</span>    <span class="keyword">public</span> <span class="storage">void</span> <span class="function">addEntity</span><span class="paren">(</span><span class="class-name">Entity</span> <span class="variable">entity</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">51</span>        <span class="control">if</span> <span class="paren">(</span><span class="variable">entity</span> <span class="operator">==</span> <span class="number">null</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">52</span>            <span class="control">throw</span> <span class="keyword">new</span> <span class="class-name">IllegalArgumentException</span><span class="paren">(</span><span class="string">"Entity cannot be null"</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">53</span>        <span class="paren">}</span></div>
+<div class="line"><span class="ln">54</span>        <span class="variable">entities</span><span class="paren">.</span><span class="function">add</span><span class="paren">(</span><span class="variable">entity</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">55</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">56</span></div>
+<div class="line"><span class="ln">57</span>    <span class="keyword">private</span> <span class="storage">void</span> <span class="function">render</span><span class="paren">(</span><span class="storage">double</span> <span class="variable">interpolation</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">58</span>        <span class="control">for</span> <span class="paren">(</span><span class="class-name">Entity</span> <span class="variable">entity</span> <span class="paren">:</span> <span class="variable">entities</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">59</span>            <span class="class-name">Vector3</span> <span class="variable">renderPos</span> <span class="operator">=</span> <span class="class-name">Vector3</span><span class="paren">.</span><span class="function">lerp</span><span class="paren">(</span></div>
+<div class="line"><span class="ln">60</span>                <span class="variable">entity</span><span class="paren">.</span><span class="function">getPreviousPosition</span><span class="paren">(),</span></div>
+<div class="line"><span class="ln">61</span>                <span class="variable">entity</span><span class="paren">.</span><span class="function">getPosition</span><span class="paren">(),</span></div>
+<div class="line"><span class="ln">62</span>                <span class="variable">interpolation</span></div>
+<div class="line"><span class="ln">63</span>            <span class="paren">);</span></div>
+<div class="line"><span class="ln">64</span>            <span class="variable">entity</span><span class="paren">.</span><span class="function">draw</span><span class="paren">(</span><span class="variable">renderPos</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">65</span>        <span class="paren">}</span></div>
+<div class="line"><span class="ln">66</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">67</span><span class="paren">}</span></div>
+    </div>
+
+    <!-- Tab 2: Renderer.java -->
+    <div class="code-panel" id="panel-2">
+<div class="line"><span class="ln"> 1</span><span class="keyword">package</span> <span class="variable">com</span><span class="paren">.</span><span class="property">engine</span><span class="paren">.</span><span class="property">graphics</span><span class="paren">;</span></div>
+<div class="line"><span class="ln"> 2</span></div>
+<div class="line"><span class="ln"> 3</span><span class="control">import</span> <span class="variable">com</span><span class="paren">.</span><span class="property">engine</span><span class="paren">.</span><span class="property">math</span><span class="paren">.</span><span class="class-name">Vector3</span><span class="paren">;</span></div>
+<div class="line"><span class="ln"> 4</span><span class="control">import</span> <span class="variable">java</span><span class="paren">.</span><span class="property">util</span><span class="paren">.</span><span class="class-name">Map</span><span class="paren">;</span></div>
+<div class="line"><span class="ln"> 5</span><span class="control">import</span> <span class="variable">java</span><span class="paren">.</span><span class="property">util</span><span class="paren">.</span><span class="class-name">HashMap</span><span class="paren">;</span></div>
+<div class="line"><span class="ln"> 6</span></div>
+<div class="line"><span class="ln"> 7</span><span class="comment">/**</span></div>
+<div class="line"><span class="ln"> 8</span><span class="comment"> * Handles shader programs and draw calls.</span></div>
+<div class="line"><span class="ln"> 9</span><span class="comment"> * Supports batched rendering for performance.</span></div>
+<div class="line"><span class="ln">10</span><span class="comment"> */</span></div>
+<div class="line"><span class="ln">11</span><span class="keyword">public</span> <span class="keyword">class</span> <span class="class-name">Renderer</span> <span class="keyword">implements</span> <span class="class-name">AutoCloseable</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">12</span></div>
+<div class="line"><span class="ln">13</span>    <span class="keyword">private</span> <span class="keyword">final</span> <span class="class-name">Map</span><span class="paren">&lt;</span><span class="class-name">String</span><span class="paren">,</span> <span class="class-name">Shader</span><span class="paren">&gt;</span> <span class="variable">shaderCache</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="class-name">HashMap</span><span class="paren">&lt;&gt;();</span></div>
+<div class="line"><span class="ln">14</span>    <span class="keyword">private</span> <span class="storage">int</span> <span class="variable">drawCalls</span> <span class="operator">=</span> <span class="number">0</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">15</span>    <span class="keyword">private</span> <span class="storage">int</span> <span class="variable">maxBatchSize</span> <span class="operator">=</span> <span class="number">1024</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">16</span></div>
+<div class="line"><span class="ln">17</span>    <span class="keyword">public</span> <span class="class-name">Shader</span> <span class="function">loadShader</span><span class="paren">(</span><span class="class-name">String</span> <span class="variable">name</span><span class="paren">,</span> <span class="class-name">String</span> <span class="variable">vertPath</span><span class="paren">,</span> <span class="class-name">String</span> <span class="variable">fragPath</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">18</span>        <span class="control">if</span> <span class="paren">(</span><span class="variable">shaderCache</span><span class="paren">.</span><span class="function">containsKey</span><span class="paren">(</span><span class="variable">name</span><span class="paren">))</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">19</span>            <span class="control">return</span> <span class="variable">shaderCache</span><span class="paren">.</span><span class="function">get</span><span class="paren">(</span><span class="variable">name</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">20</span>        <span class="paren">}</span></div>
+<div class="line"><span class="ln">21</span></div>
+<div class="line"><span class="ln">22</span>        <span class="control">try</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">23</span>            <span class="class-name">Shader</span> <span class="variable">shader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="class-name">Shader</span><span class="paren">(</span><span class="variable">vertPath</span><span class="paren">,</span> <span class="variable">fragPath</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">24</span>            <span class="variable">shader</span><span class="paren">.</span><span class="function">compile</span><span class="paren">();</span></div>
+<div class="line"><span class="ln">25</span>            <span class="variable">shaderCache</span><span class="paren">.</span><span class="function">put</span><span class="paren">(</span><span class="variable">name</span><span class="paren">,</span> <span class="variable">shader</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">26</span>            <span class="control">return</span> <span class="variable">shader</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">27</span>        <span class="paren">}</span> <span class="control">catch</span> <span class="paren">(</span><span class="class-name">ShaderException</span> <span class="variable">e</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">28</span>            <span class="class-name">System</span><span class="paren">.</span><span class="property">err</span><span class="paren">.</span><span class="function">println</span><span class="paren">(</span><span class="string">"Failed to load shader: "</span> <span class="operator">+</span> <span class="variable">name</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">29</span>            <span class="control">throw</span> <span class="keyword">new</span> <span class="class-name">RuntimeException</span><span class="paren">(</span><span class="string">"Shader compilation failed"</span><span class="paren">,</span> <span class="variable">e</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">30</span>        <span class="paren">}</span></div>
+<div class="line"><span class="ln">31</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">32</span></div>
+<div class="line"><span class="ln">33</span>    <span class="keyword">public</span> <span class="storage">void</span> <span class="function">drawMesh</span><span class="paren">(</span><span class="class-name">Mesh</span> <span class="variable">mesh</span><span class="paren">,</span> <span class="class-name">Vector3</span> <span class="variable">position</span><span class="paren">,</span> <span class="class-name">Shader</span> <span class="variable">shader</span><span class="paren">)</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">34</span>        <span class="variable">shader</span><span class="paren">.</span><span class="function">bind</span><span class="paren">();</span></div>
+<div class="line"><span class="ln">35</span>        <span class="variable">shader</span><span class="paren">.</span><span class="function">setUniform</span><span class="paren">(</span><span class="string">"u_position"</span><span class="paren">,</span> <span class="variable">position</span><span class="paren">);</span></div>
+<div class="line"><span class="ln">36</span>        <span class="variable">mesh</span><span class="paren">.</span><span class="function">render</span><span class="paren">();</span></div>
+<div class="line"><span class="ln">37</span>        <span class="variable">drawCalls</span><span class="operator">++</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">38</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">39</span></div>
+<div class="line"><span class="ln">40</span>    <span class="keyword">public</span> <span class="storage">int</span> <span class="function">getDrawCalls</span><span class="paren">()</span> <span class="paren">{</span> <span class="control">return</span> <span class="variable">drawCalls</span><span class="paren">;</span> <span class="paren">}</span></div>
+<div class="line"><span class="ln">41</span></div>
+<div class="line"><span class="ln">42</span>    <span class="keyword">public</span> <span class="storage">void</span> <span class="function">resetStats</span><span class="paren">()</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">43</span>        <span class="variable">drawCalls</span> <span class="operator">=</span> <span class="number">0</span><span class="paren">;</span></div>
+<div class="line"><span class="ln">44</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">45</span></div>
+<div class="line"><span class="ln">46</span>    <span class="annotation">@Override</span></div>
+<div class="line"><span class="ln">47</span>    <span class="keyword">public</span> <span class="storage">void</span> <span class="function">close</span><span class="paren">()</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">48</span>        <span class="control">for</span> <span class="paren">(</span><span class="class-name">Shader</span> <span class="variable">shader</span> <span class="paren">:</span> <span class="variable">shaderCache</span><span class="paren">.</span><span class="function">values</span><span class="paren">())</span> <span class="paren">{</span></div>
+<div class="line"><span class="ln">49</span>            <span class="variable">shader</span><span class="paren">.</span><span class="function">dispose</span><span class="paren">();</span></div>
+<div class="line"><span class="ln">50</span>        <span class="paren">}</span></div>
+<div class="line"><span class="ln">51</span>        <span class="variable">shaderCache</span><span class="paren">.</span><span class="function">clear</span><span class="paren">();</span></div>
+<div class="line"><span class="ln">52</span>    <span class="paren">}</span></div>
+<div class="line"><span class="ln">53</span><span class="paren">}</span></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function switchTab(index) {
+  document.querySelectorAll('.tab').forEach((tab, i) => {
+    tab.className = i === index ? 'tab active' : 'tab inactive';
+  });
+  document.querySelectorAll('.code-panel').forEach((panel, i) => {
+    panel.className = i === index ? 'code-panel active' : 'code-panel';
+  });
+}
+</script>
+</body>
+</html>
